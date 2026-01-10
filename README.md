@@ -29,6 +29,8 @@ These files should be used to stay up to standards on the **Contribution Guideli
     - Enforces consistent style across all web-based languages.
   - [`scripts/todo.py`](scripts/todo.py) *(may get replaced)*
     - An automated script for tracking multiple different types of `TODO` comments in every language using python.
+  - [`scripts/mlog.h`](scripts/mlog.h) *(permanent)*
+    - A C API for quick logging functions that actually make sense.
   - [`VERSIONING.md`](VERSIONING.md) *(permanent)*
     - This is used as a way to show what versioning scheme we are using. In Monitio projects, it is **mandatory** to use the [*SemVer Typing*](https://github.com/monitio/semver-typing) versioning scheme.
 

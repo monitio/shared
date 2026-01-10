@@ -34,7 +34,7 @@ TYPE_PATTERN = '|'.join(re.escape(t) for t in TYPES)
 TODO_REGEX = re.compile(
   # Match type, label in parentheses, optional colon, and message up to the newline.
   fr'({TYPE_PATTERN})\s*\(([^)]*)\)(?:\s*:\s*([^\n]*))?',
-  re.IGNORECASE 
+  re.IGNORECASE
 )
 
 def get_header_text(todo_type: str) -> str:
@@ -53,16 +53,16 @@ def print_styled(message: str, style: str = Colors.ENDC, indent: int = 0):
 
 def extract_todos_from_project(root_dir=".") -> list:
   """
-  Walks the project directory, extracts TODOs using regex, and returns 
+  Walks the project directory, extracts TODOs using regex, and returns
   a list of dictionaries, one for each found todo.
   """
   print_styled(f"\n{Colors.BOLD}Starting Project Scan{Colors.ENDC}", style=Colors.HEADER)
 
   styled_types = ", ".join(f"{Colors.BOLD}{t}{Colors.ENDC}" for t in TYPES)
   print_styled(f"> Types targeted: {styled_types}", indent=2)
-  
+
   todos_list = []
-  
+
   for dirpath, dirnames, filenames in os.walk(root_dir):
     # Skip excluded directories
     dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS and not d.startswith('.')]
@@ -236,4 +236,3 @@ def main():
 
 if __name__ == "__main__":
   main()
-
