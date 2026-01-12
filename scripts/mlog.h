@@ -22,8 +22,9 @@
  *
  */
 
-#include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 // -- Types and function prototypes
@@ -57,7 +58,7 @@ static inline ML_HEX ml_hsl_to_hex(ML_HSL hsl);
 static inline ML_RGBA ml_hsl_to_rgba(ML_HSL hsl);
 static inline ML_HSL ml_rgba_to_hsl(ML_RGBA rgba);
 static inline ML_HEX ml_rgba_to_hex(ML_RGBA rgba);
-static inline void ml_err(const char* msg);
+static inline void ml_err(bool quit, const char* msg);
 static inline void ml_wrn(const char* msg);
 static inline void ml_inf(const char* msg);
 static inline void ml_suc(const char* msg);
@@ -204,13 +205,13 @@ static inline ML_HSL ml_rgba_to_hsl(ML_RGBA rgba) {
 
 // --- Display logging functions
 
-static inline void ml_err(const char* msg) {
+static inline void ml_err(bool quit, const char* msg) {
   _ml_print_prefix();
   _ml_print_sym("!", "#E31D39");
   printf("Error: %s", msg);
   _ml_apply_reset();
   printf("\n");
-  exit(1);
+  if (quit) { exit(1); }
 }
 
 static inline void ml_wrn(const char* msg) {
