@@ -24,6 +24,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -58,10 +59,10 @@ static inline ML_HEX ml_hsl_to_hex(ML_HSL hsl);
 static inline ML_RGBA ml_hsl_to_rgba(ML_HSL hsl);
 static inline ML_HSL ml_rgba_to_hsl(ML_RGBA rgba);
 static inline ML_HEX ml_rgba_to_hex(ML_RGBA rgba);
-static inline void ml_err(bool quit, const char* msg);
-static inline void ml_wrn(const char* msg);
-static inline void ml_inf(const char* msg);
-static inline void ml_suc(const char* msg);
+static inline void ml_err(bool quit, const char* msg, ...);
+static inline void ml_wrn(const char* msg, ...);
+static inline void ml_inf(const char* msg, ...);
+static inline void ml_suc(const char* msg, ...);
 
 // -- Internal helpers
 
@@ -205,35 +206,51 @@ static inline ML_HSL ml_rgba_to_hsl(ML_RGBA rgba) {
 
 // --- Display logging functions
 
-static inline void ml_err(bool quit, const char* msg) {
+static inline void ml_err(bool quit, const char* msg, ...) {
   _ml_print_prefix();
   _ml_print_sym("!", "#E31D39");
-  printf("Error: %s", msg);
+  printf("Error: ");
+  va_list args;
+  va_start(args, fmt);
+  vprintf(fmt, args);
+  va_end(args);
   _ml_apply_reset();
   printf("\n");
   if (quit) { exit(1); }
 }
 
-static inline void ml_wrn(const char* msg) {
+static inline void ml_wrn(const char* msg, ...) {
   _ml_print_prefix();
   _ml_print_sym("?", "#F5CB3A");
-  printf("Warning: %s", msg);
+  printf("Warning: ");
+  va_list args;
+  va_start(args, fmt);
+  vprintf(fmt, args);
+  va_end(args);
   _ml_apply_reset();
   printf("\n");
 }
 
-static inline void ml_inf(const char* msg) {
+static inline void ml_inf(const char* msg, ...) {
   _ml_print_prefix();
   _ml_print_sym("*", "#3AE6F5");
-  printf("Note: %s", msg);
+  printf("Note: ");
+  va_list args;
+  va_start(args, fmt);
+  vprintf(fmt, args);
+  va_end(args);
   _ml_apply_reset();
   printf("\n");
 }
 
-static inline void ml_suc(const char* msg) {
+static inline void ml_suc(const char* msg, ...) {
   _ml_print_prefix();
   _ml_print_sym("+", "#3AF547");
-  printf("Success: %s", msg);
+  printf("Success: ");
+  va_list args;
+  va_start(args, fmt);
+  vprintf(fmt, args);
+  va_end(args);
   _ml_apply_reset();
   printf("\n");
 }
