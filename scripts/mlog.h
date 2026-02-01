@@ -211,8 +211,8 @@ static inline void ml_err(bool quit, const char* msg, ...) {
   _ml_print_sym("!", "#E31D39");
   printf("Error: ");
   va_list args;
-  va_start(args, fmt);
-  vprintf(fmt, args);
+  va_start(args, msg);
+  vprintf(msg, args);
   va_end(args);
   _ml_apply_reset();
   printf("\n");
@@ -224,8 +224,8 @@ static inline void ml_wrn(const char* msg, ...) {
   _ml_print_sym("?", "#F5CB3A");
   printf("Warning: ");
   va_list args;
-  va_start(args, fmt);
-  vprintf(fmt, args);
+  va_start(args, msg);
+  vprintf(msg, args);
   va_end(args);
   _ml_apply_reset();
   printf("\n");
@@ -236,8 +236,8 @@ static inline void ml_inf(const char* msg, ...) {
   _ml_print_sym("*", "#3AE6F5");
   printf("Note: ");
   va_list args;
-  va_start(args, fmt);
-  vprintf(fmt, args);
+  va_start(args, msg);
+  vprintf(msg, args);
   va_end(args);
   _ml_apply_reset();
   printf("\n");
@@ -248,8 +248,8 @@ static inline void ml_suc(const char* msg, ...) {
   _ml_print_sym("+", "#3AF547");
   printf("Success: ");
   va_list args;
-  va_start(args, fmt);
-  vprintf(fmt, args);
+  va_start(args, msg);
+  vprintf(msg, args);
   va_end(args);
   _ml_apply_reset();
   printf("\n");
